@@ -1,3 +1,4 @@
+
 src/
 │
 ├── assets/        # Static assets (images, icons, fonts, etc.)
