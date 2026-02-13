@@ -1,0 +1,38 @@
+.custom-swiper .swiper-button-next,
+.custom-swiper .swiper-button-prev {
+  color: white;
+  background-color: #182df2;
+
+  text-align: center;
+  border-radius: 50%;
+  padding: 5px;
+}
+.custom-swiper .swiper-button-next svg,
+.custom-swiper .swiper-button-prev svg {
+  height: 16px;
+}
+
+/* تنسيق النقاط */
+.my-custom-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.my-custom-pagination .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: #d1d5db; /* رمادي */
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.my-custom-pagination .swiper-pagination-bullet-active {
+  background: #00bcd4 !important; /* لونك */
+  width: 32px; /* نقطة طويلة */
+  border-radius: 6px;
+}
+
+.my-custom-pagination .swiper-pagination-bullet:hover {
+  transform: scale(1.2);
+}
