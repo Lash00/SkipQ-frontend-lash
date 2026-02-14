@@ -1,4 +1,5 @@
 import themesMAP from "../../../themes/themes";
+import { motion } from "framer-motion";
 
 export default function Services({ dark }) {
   // const [availbeServiec, setAvailbeServiec] = useState([]);
@@ -34,7 +35,35 @@ export default function Services({ dark }) {
       //   description_ar: "خدمات الأحوال المدنية والوثائق الرسمية",
       org_description: "Civil status services and official documents",
     },
+    {
+      service_id: 8,
+      //   name_ar: "الأحوال المدنية",
+      org_name: "Lash org",
+      type: "lash",
+      org_image: "/service_images/Lash_company.png",
+      //   description_ar: "خدمات الأحوال المدنية والوثائق الرسمية",
+      org_description: "Lash company for software Solutions",
+    },
   ];
+  //test animation effect
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 }, // قبل ما يظهر
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    }, // بعد ما يظهر
+    viewport: { once: false },
+  };
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.4, // كل كارد يظهر بعد 0.2s من اللي قبله
+      },
+    },
+  };
+
   return (
     <div
       className="p-6 w-full lg:max-w-7xl lg:mx-auto px-4 sm:px-6 lg:px-8 "
@@ -45,32 +74,89 @@ export default function Services({ dark }) {
           : themesMAP["dark-main-bg"],
       }}
     >
-      <div
-        className="w-full text-center mb-8"
-        style={{
-          color: dark ? themesMAP["text-light"] : themesMAP["text-dark"],
-        }}
+      <motion.div
+        initial={{ opacity: 0, y: 80 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: false }}
       >
-        <h1 className="text-4xl">Available Services</h1>
-        <p className="text-xl text-[#64748b]">
-          Track crowds across all major service categories and make smarter
-          visits.
-        </p>
-      </div>
-      <div className="grid lg:grid-cols-3 gap-4 sm:grid-cols-1 md:grid-cols-2 mt-16">
-        {availbeServiec.map((serv, i) => {
-          return (
-            <Card
-              image={serv.org_image}
+        <div
+          className="w-full text-center mb-8"
+          style={{
+            color: dark ? themesMAP["text-light"] : themesMAP["text-dark"],
+          }}
+        >
+          <h1 className="text-4xl">Available Services</h1>
+          <p className="text-xl text-[#64748b]">
+            Track crowds across all major service categories and make smarter
+            visits.
+          </p>
+        </div>
+        {/* <div className="grid lg:grid-cols-3 gap-4 sm:grid-cols-1 md:grid-cols-2 mt-16">
+          {availbeServiec.map((serv, i) => {
+            return (
+              <Card
+                image={serv.org_image}
+                key={i}
+                id={serv.service_id}
+                dark={dark}
+                name={serv.org_name}
+                desc={serv.org_description}
+              />
+            );
+          })}
+        </div> */}
+
+        {/* <motion.div
+          className="grid lg:grid-cols-3 gap-4 sm:grid-cols-1 md:grid-cols-2 mt-16"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {availbeServiec.map((serv, i) => (
+            <motion.div
               key={i}
-              id={serv.service_id}
-              dark={dark}
-              name={serv.org_name}
-              desc={serv.org_description}
-            />
-          );
-        })}
-      </div>
+              variants={cardVariants}
+              whileHover={{ scale: 1.05 }}
+              whileInView="visible"
+              initial="hidden"
+              viewport={{ once: false }}
+              // transition={{ duration: 0.8 }}
+            >
+              <Card
+                image={serv.org_image}
+                id={serv.service_id}
+                dark={dark}
+                name={serv.org_name}
+                desc={serv.org_description}
+              />
+            </motion.div>
+          ))}
+        </motion.div> */}
+        <motion.div
+          className="grid lg:grid-cols-3 gap-4 sm:grid-cols-1 md:grid-cols-2 mt-16"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible" // هنا الأب بيتفاعل مع الـviewport
+          viewport={{ once: false, amount: 0.3 }}
+        >
+          {availbeServiec.map((serv, i) => (
+            <motion.div
+              key={i}
+              variants={cardVariants} // كل كارد بيستخدم الـvariant بس
+              whileHover={{ scale: 1.05 }}
+            >
+              <Card
+                image={serv.org_image}
+                id={serv.service_id}
+                dark={dark}
+                name={serv.org_name}
+                desc={serv.org_description}
+              />
+            </motion.div>
+          ))}
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
@@ -120,8 +206,8 @@ function Card({ image, dark, name, desc, id }) {
       <div className="rounded-xl" style={{ minHeight: "10vh" }}>
         <img
           src={image}
-          alt="errro"
-          className="rounded-t-lg object-fill w-full"
+          alt="error"
+          className="w-full h-40 sm:h-48 md:h-58 lg:h-64 object-fill rounded-t-lg"
         />
       </div>
 

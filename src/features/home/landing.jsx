@@ -7,7 +7,7 @@ export default function Landing({ dark }) {
     <div
       className="p-6 w-full lg:max-w-7xl lg:mx-auto px-4 sm:px-6 lg:px-8 "
       style={{
-        minHeight: "70vh",
+        minHeight: "90vh",
         backgroundColor: dark
           ? themesMAP["light-main-bg"]
           : themesMAP["dark-main-bg"],
