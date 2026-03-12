@@ -79,13 +79,6 @@ function BranchMap({ location, dark }) {
             <FontAwesomeIcon icon={faDirections} />
             Directions
           </a>
-          <button
-            className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white transition hover:opacity-90"
-            style={{ background: "rgb(65,15,199)" }}
-          >
-            <FontAwesomeIcon icon={faPhone} />
-            Call
-          </button>
         </div>
       </div>
     </motion.div>
