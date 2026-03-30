@@ -2,7 +2,7 @@ import { useOutletContext, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
-import BranchMap from "./components/BranchMap";
+import BranchMap from "../../ui/BranchMap";
 import ServicesList from "./components/ServicesList";
 import ServiceModal from "./components/ServiceModal";
 import BranchInfoBox from "./components/BranchInfoBox";
@@ -82,17 +82,6 @@ function BranchDetails() {
     <div
       className={`min-h-screen px-4 py-8 md:px-10 lg:px-20 ${pageBg} transition-colors duration-300`}
     >
-      {/* Back Button */}
-      <motion.button
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.4 }}
-        onClick={() => navigate(-1)}
-        className={`flex items-center gap-2 text-sm font-medium mb-6 hover:opacity-70 transition ${textColor}`}
-      >
-        &larr; Back
-      </motion.button>
-
       {/* Page Title */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}

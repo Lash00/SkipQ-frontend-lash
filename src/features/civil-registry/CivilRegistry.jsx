@@ -4,7 +4,7 @@ import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import SearchBar from "./components/SearchBar";
 import BranchList from "./components/BranchList";
-import Pagination from "./components/Pagination";
+import Pagination from "../../ui/Pagination";
 import LocationPermissionModal from "./components/LocationPermissionModal";
 
 const BASE_URL = "http://localhost:8000";
@@ -196,8 +196,7 @@ function CivilRegistry() {
       <div
         className={`min-h-screen px-4 py-8 md:px-10 lg:px-20 ${pageBg} transition-colors duration-300`}
       >
-        {/* Back */}
-        <motion.button
+        {/* <motion.button
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4 }}
@@ -205,7 +204,7 @@ function CivilRegistry() {
           className={`flex items-center gap-2 text-sm font-medium mb-6 hover:opacity-70 transition ${textColor}`}
         >
           ← Back
-        </motion.button>
+        </motion.button> */}
 
         {/* Header */}
         <motion.div

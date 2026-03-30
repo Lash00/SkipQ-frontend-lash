@@ -180,7 +180,7 @@ export default function Navbar({ dark, setDark }) {
             >
               <NavLink
                 to="/registration-guidelines"
-                className="text-white rounded-xl bg-blue-700  shadow-xs font-medium text-sm px-4 py-2.5"
+                className="text-white rounded-xl bg-rgb(65, 15, 199)  shadow-xs font-medium text-sm px-4 py-2.5"
               >
                 Sign up
               </NavLink>
