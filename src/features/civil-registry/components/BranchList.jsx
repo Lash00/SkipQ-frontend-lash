@@ -23,7 +23,6 @@ function BranchList({ branches, dark, loading }) {
   const textColor = dark ? "text-white" : "text-gray-900";
   const subText = dark ? "text-gray-400" : "text-gray-500";
 
-  // ← Loading State: بيعرض skeleton cards بدل spinner عشان يبان أحسن
   if (loading) {
     return (
       <div className="flex flex-col gap-2 mt-4">
@@ -48,7 +47,7 @@ function BranchList({ branches, dark, loading }) {
         animate={{ opacity: 1 }}
         className="flex flex-col items-center justify-center py-20 gap-3"
       >
-        <span className="text-5xl">🏢</span>
+        {/* <span className="text-5xl">🏢</span> */}
         <p className={`text-lg font-semibold ${textColor}`}>
           No branches found
         </p>
