@@ -64,13 +64,14 @@ function BranchCard({ branch, index, dark }) {
         whileTap={{ scale: 0.97 }}
         onClick={() => navigate(`/civil-registry/${branch.branch_id}`)}
         className="w-full py-2.5 rounded-xl text-sm font-semibold text-white tracking-wide"
-        style={{ background: "rgb(65,15,199)" }}
-        onMouseEnter={(e) =>
-          (e.currentTarget.style.background = "rgb(85,35,219)")
-        }
-        onMouseLeave={(e) =>
-          (e.currentTarget.style.background = "rgb(65,15,199)")
-        }
+        style={{ background: branch.isActive ? "rgb(65,15,199)" : "gray" }}
+        // onMouseEnter={(e) =>
+        //   (e.currentTarget.style.background = "rgb(85,35,219)")
+        // }
+        // onMouseLeave={(e) =>
+        //   (e.currentTarget.style.background = "rgb(65,15,199)")
+        // }
+        disabled={branch.isActive ? false : true}
       >
         View Details &amp; Location &rarr;
       </motion.button>

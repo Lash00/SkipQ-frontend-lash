@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import BranchMap from "./components/BranchMap";
 import ServicesList from "./components/ServicesList";
 import ServiceModal from "./components/ServiceModal";
+import BranchInfoBox from "./components/BranchInfoBox";
 
 const BASE_URL = "http://localhost:8000";
 
@@ -81,6 +82,7 @@ function BranchDetails() {
     <div
       className={`min-h-screen px-4 py-8 md:px-10 lg:px-20 ${pageBg} transition-colors duration-300`}
     >
+      {/* Back Button */}
       <motion.button
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -91,6 +93,7 @@ function BranchDetails() {
         &larr; Back
       </motion.button>
 
+      {/* Page Title */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -105,8 +108,21 @@ function BranchDetails() {
         <p className={`text-sm mt-1 ${subText}`}>{branch.branch_code}</p>
       </motion.div>
 
-      <BranchMap location={location} dark={dark} />
+      {/* Map + Info Box — 2/3 | 1/3 */}
+      <div className="grid grid-cols-3 gap-4 mb-8">
+        <div className="col-span-2">
+          <BranchMap location={location} dark={dark} />
+        </div>
+        <div className="col-span-1">
+          <BranchInfoBox
+            branch={branch}
+            dark={dark}
+            is_Active={branch.isActive}
+          />
+        </div>
+      </div>
 
+      {/* Services List */}
       <ServicesList
         services={filteredServices}
         searchService={searchService}
@@ -115,6 +131,7 @@ function BranchDetails() {
         dark={dark}
       />
 
+      {/* Service Modal */}
       {selectedService && (
         <ServiceModal
           service={selectedService}

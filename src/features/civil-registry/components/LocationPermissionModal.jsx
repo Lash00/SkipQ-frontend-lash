@@ -62,7 +62,7 @@ function LocationPermissionModal({
                     <FontAwesomeIcon
                       icon={faLocationDot}
                       size="lg"
-                      style={{ color: dark ? "white" : "rgb(65,15,199)" }}
+                      style={{ color: "white" }}
                     />
                   </div>
                   <div>
