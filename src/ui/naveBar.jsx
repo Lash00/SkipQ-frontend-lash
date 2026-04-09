@@ -31,7 +31,8 @@ export default function Navbar({ dark, setDark }) {
           </a> */}
           <button
             type="button"
-            className={`text-white rounded-xl bg-brand box-border border border-transparent bg-blue-700 hover:bg-blue-600 focus:ring-blue-300 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none`}
+            style={{ backgroundColor: "rgb(65, 15, 199)" }}
+            className={`text-white rounded-xl bg-brand box-border border border-transparent hover:bg-blue-600 focus:ring-blue-300 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none`}
           >
             S
           </button>
@@ -105,13 +106,13 @@ export default function Navbar({ dark, setDark }) {
           </p>
 
           <button
-            // style={{ backgroundColor: "rgb(65, 15, 199)" }}
+            style={{ backgroundColor: "rgb(65, 15, 199)" }}
             type="button"
-            className={`text-white rounded-xl bg-brand box-border border border-transparent bg-blue-700 hover:bg-blue-600 focus:ring-blue-300 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none`}
+            className={`text-white rounded-xl bg-brand box-border border border-transparent  hover:bg-blue-600 focus:ring-blue-300 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none`}
           >
             <NavLink
               to="/registration-guidelines"
-              className="text-white rounded-xl bg-blue-700 hover:bg-blue-600 shadow-xs font-medium text-sm px-4 py-2.5"
+              className="text-white rounded-xl   shadow-xs font-medium text-sm px-4 py-2.5"
             >
               Sign up
             </NavLink>

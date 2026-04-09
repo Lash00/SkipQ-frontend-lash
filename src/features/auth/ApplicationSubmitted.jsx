@@ -92,7 +92,12 @@ export default function ApplicationSubmitted({
             style={{ color: dark ? "#94a3b8" : "#64748b" }}
           >
             Thank you for registering{" "}
-            <span className="text-blue-500 font-semibold">{orgName}</span>
+            <span
+              className="font-semibold"
+              style={{ color: "rgb(65, 15, 199)" }}
+            >
+              {orgName}
+            </span>
           </motion.p>
         </div>
 
@@ -112,7 +117,9 @@ export default function ApplicationSubmitted({
                     stiffness: 200,
                   }}
                   className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold shrink-0 text-white"
-                  style={{ background: step.active ? "#2563eb" : "#94a3b8" }}
+                  style={{
+                    background: step.active ? "rgb(65, 15, 199)" : "#94a3b8",
+                  }}
                 >
                   {step.number}
                 </motion.div>
@@ -132,7 +139,7 @@ export default function ApplicationSubmitted({
                     style={{
                       height: "40px",
                       background: step.active
-                        ? "#2563eb"
+                        ? "rgb(65, 15, 199)"
                         : dark
                           ? "#334155"
                           : "#cbd5e1",
@@ -179,7 +186,9 @@ export default function ApplicationSubmitted({
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.7, delay: 1.9, ease: "easeOut" }}
           className="w-full h-1 rounded-full mb-6 origin-left"
-          style={{ background: "linear-gradient(to right, #2563eb, #60a5fa)" }}
+          style={{
+            background: "linear-gradient(to right, #2563eb, rgb(65, 15, 199))",
+          }}
         />
 
         {/* ---- Info Cards ---- */}
@@ -194,7 +203,7 @@ export default function ApplicationSubmitted({
             <div className="flex items-center gap-2 mb-2">
               <FontAwesomeIcon
                 icon={faClock}
-                className="text-blue-500"
+                className="text-blue-800"
                 size="lg"
               />
               <p
@@ -237,7 +246,7 @@ export default function ApplicationSubmitted({
             <div className="flex items-center gap-2 mb-2">
               <FontAwesomeIcon
                 icon={faBolt}
-                className="text-blue-500"
+                className="text-blue-800"
                 size="lg"
               />
               <p

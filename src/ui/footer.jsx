@@ -28,6 +28,7 @@ export default function Footer({ dark }) {
             <div className="flex lg:flex-1 gap-3 items-baseline">
               <button
                 type="button"
+                style={{ backgroundColor: "rgb(65, 15, 199)" }}
                 className={`text-white rounded-xl bg-brand box-border border border-transparent bg-blue-700 hover:bg-blue-600 focus:ring-blue-300 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none`}
               >
                 S

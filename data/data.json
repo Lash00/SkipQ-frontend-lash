@@ -252,72 +252,72 @@
   "location": [
     {
       "location_id": 1,
-      "latitude": 30.0444,
-      "longitude": 31.2357,
+      "latitude": 30.0478,
+      "longitude": 31.2336,
       "address_details": "وسط البلد، القاهرة",
       "created_at": "2023-01-01T00:00:00Z",
       "updated_at": "2024-01-01T00:00:00Z"
     },
     {
       "location_id": 2,
-      "latitude": 30.0626,
-      "longitude": 31.2497,
+      "latitude": 30.0916,
+      "longitude": 31.33,
       "address_details": "مصر الجديدة، القاهرة",
       "created_at": "2023-01-02T00:00:00Z",
       "updated_at": "2024-01-02T00:00:00Z"
     },
     {
       "location_id": 3,
-      "latitude": 29.9792,
-      "longitude": 31.1342,
+      "latitude": 29.9787,
+      "longitude": 31.134,
       "address_details": "الجيزة، الجيزة",
       "created_at": "2023-01-03T00:00:00Z",
       "updated_at": "2024-01-03T00:00:00Z"
     },
     {
       "location_id": 4,
-      "latitude": 31.2001,
-      "longitude": 29.9187,
+      "latitude": 31.2005,
+      "longitude": 29.918,
       "address_details": "وسط البلد، الإسكندرية",
       "created_at": "2023-01-04T00:00:00Z",
       "updated_at": "2024-01-04T00:00:00Z"
     },
     {
       "location_id": 5,
-      "latitude": 30.5965,
-      "longitude": 32.2715,
+      "latitude": 30.596,
+      "longitude": 32.2717,
       "address_details": "الإسماعيلية",
       "created_at": "2023-01-05T00:00:00Z",
       "updated_at": "2024-01-05T00:00:00Z"
     },
     {
       "location_id": 6,
-      "latitude": 31.4165,
-      "longitude": 31.8133,
+      "latitude": 31.0409,
+      "longitude": 31.3785,
       "address_details": "المنصورة، الدقهلية",
       "created_at": "2023-01-06T00:00:00Z",
       "updated_at": "2024-01-06T00:00:00Z"
     },
     {
       "location_id": 7,
-      "latitude": 30.8168,
-      "longitude": 30.9942,
+      "latitude": 30.1241,
+      "longitude": 31.2605,
       "address_details": "شبرا الخيمة، القليوبية",
       "created_at": "2023-01-07T00:00:00Z",
       "updated_at": "2024-01-07T00:00:00Z"
     },
     {
       "location_id": 8,
-      "latitude": 30.2127,
-      "longitude": 31.4394,
+      "latitude": 30.2289,
+      "longitude": 31.4765,
       "address_details": "العبور، القاهرة الجديدة",
       "created_at": "2023-01-08T00:00:00Z",
       "updated_at": "2024-01-08T00:00:00Z"
     },
     {
       "location_id": 9,
-      "latitude": 27.1783,
-      "longitude": 31.1859,
+      "latitude": 26.5591,
+      "longitude": 31.6957,
       "address_details": "سوهاج",
       "created_at": "2023-01-09T00:00:00Z",
       "updated_at": "2024-01-09T00:00:00Z"
@@ -340,8 +340,8 @@
     },
     {
       "location_id": 12,
-      "latitude": 31.0409,
-      "longitude": 31.3785,
+      "latitude": 30.7865,
+      "longitude": 31.0004,
       "address_details": "طنطا، الغربية",
       "created_at": "2023-01-12T00:00:00Z",
       "updated_at": "2024-01-12T00:00:00Z"
@@ -512,21 +512,17 @@
       "org_id": 1,
       "account_id": 1,
       "location_id": 1,
-      "branch_name": "New York Main Branch",
-      "isActive": true,
-      "created_at": "2023-01-15T00:00:00Z",
-      "updated_at": "2024-01-15T00:00:00Z"
+      "branch_name": "سجل مدني القاهرة - العباسية",
+      "isActive": true
     },
     {
       "branch_id": 2,
       "branch_code": "BR-LA-001",
       "org_id": 2,
       "account_id": 2,
-      "location_id": 2,
-      "branch_name": "Los Angeles Downtown",
-      "isActive": true,
-      "created_at": "2023-02-15T00:00:00Z",
-      "updated_at": "2024-02-15T00:00:00Z"
+      "location_id": 4,
+      "branch_name": "سجل مدني الإسكندرية - سيدي جابر",
+      "isActive": true
     },
     {
       "branch_id": 3,
@@ -534,87 +530,71 @@
       "org_id": 3,
       "account_id": 3,
       "location_id": 3,
-      "branch_name": "Chicago Lake Shore",
-      "isActive": true,
-      "created_at": "2023-03-15T00:00:00Z",
-      "updated_at": "2024-03-15T00:00:00Z"
+      "branch_name": "سجل مدني الجيزة - الدقي",
+      "isActive": true
     },
     {
       "branch_id": 4,
       "branch_code": "BR-HOU-001",
       "org_id": 4,
       "account_id": 4,
-      "location_id": 4,
-      "branch_name": "Houston Central",
-      "isActive": true,
-      "created_at": "2023-04-15T00:00:00Z",
-      "updated_at": "2024-04-15T00:00:00Z"
+      "location_id": 6,
+      "branch_name": "سجل مدني المنصورة - شارع الجيش",
+      "isActive": true
     },
     {
       "branch_id": 5,
       "branch_code": "BR-PHX-001",
       "org_id": 5,
       "account_id": 5,
-      "location_id": 5,
-      "branch_name": "Phoenix Desert Branch",
-      "isActive": false,
-      "created_at": "2023-05-15T00:00:00Z",
-      "updated_at": "2024-05-15T00:00:00Z"
+      "location_id": 12,
+      "branch_name": "سجل مدني طنطا - المركز",
+      "isActive": false
     },
     {
       "branch_id": 6,
       "branch_code": "BR-PHL-001",
       "org_id": 6,
       "account_id": 6,
-      "location_id": 6,
-      "branch_name": "Philadelphia Liberty",
-      "isActive": true,
-      "created_at": "2023-06-15T00:00:00Z",
-      "updated_at": "2024-06-15T00:00:00Z"
+      "location_id": 9,
+      "branch_name": "سجل مدني أسيوط - حي شرق",
+      "isActive": true
     },
     {
       "branch_id": 7,
       "branch_code": "BR-SAT-001",
       "org_id": 7,
       "account_id": 7,
-      "location_id": 7,
-      "branch_name": "San Antonio Alamo",
-      "isActive": true,
-      "created_at": "2023-07-15T00:00:00Z",
-      "updated_at": "2024-07-15T00:00:00Z"
+      "location_id": 9,
+      "branch_name": "سجل مدني سوهاج - مدينة ناصر",
+      "isActive": true
     },
     {
       "branch_id": 8,
       "branch_code": "BR-DAL-001",
       "org_id": 8,
       "account_id": 8,
-      "location_id": 8,
-      "branch_name": "Dallas Commerce",
-      "isActive": true,
-      "created_at": "2023-08-15T00:00:00Z",
-      "updated_at": "2024-08-15T00:00:00Z"
+      "location_id": 7,
+      "branch_name": "سجل مدني الزقازيق - القومية",
+      "isActive": true
     },
     {
       "branch_id": 9,
       "branch_code": "BR-SJC-001",
       "org_id": 9,
       "account_id": 9,
-      "location_id": 9,
-      "branch_name": "San Jose Tech Park",
-      "isActive": true,
-      "created_at": "2023-09-15T00:00:00Z",
-      "updated_at": "2024-09-15T00:00:00Z"
+      "location_id": 5,
+      "branch_name": "سجل مدني بورسعيد - حي الشرق",
+      "isActive": true
     },
     {
       "branch_id": 10,
       "branch_code": "BR-AUS-001",
       "org_id": 10,
       "account_id": 10,
-      "location_id": 10,
-      "branch_name": "Austin Capitol",
-      "isActive": true,
-      "created_at": "2023-10-15T00:00:00Z",
-      "updated_at": "2024-10-15T00:00:00Z"
+      "location_id": 5,
+      "branch_name": "سجل مدني الإسماعيلية - الشيخ زايد",
+      "isActive": true
     },
     {
       "branch_id": 11,
@@ -622,21 +602,17 @@
       "org_id": 11,
       "account_id": 11,
       "location_id": 11,
-      "branch_name": "Jacksonville Beach",
-      "isActive": true,
-      "created_at": "2023-11-15T00:00:00Z",
-      "updated_at": "2024-11-15T00:00:00Z"
+      "branch_name": "سجل مدني أسوان - وسط البلد",
+      "isActive": true
     },
     {
       "branch_id": 12,
       "branch_code": "BR-SFO-001",
       "org_id": 12,
       "account_id": 12,
-      "location_id": 12,
-      "branch_name": "San Francisco Golden Gate",
-      "isActive": true,
-      "created_at": "2023-12-15T00:00:00Z",
-      "updated_at": "2024-12-15T00:00:00Z"
+      "location_id": 10,
+      "branch_name": "سجل مدني الأقصر - الكرنك",
+      "isActive": true
     }
   ],
   "denomination": [
