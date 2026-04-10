@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import SearchBar from "./components/SearchBar";
 import BranchList from "./components/BranchList";
 import Pagination from "../../ui/Pagination";
-import LocationPermissionModal from "./components/LocationPermissionModal";
+import LocationPermissionModal from "../../ui/LocationPermissionModal";
 
 const BASE_URL = "http://localhost:8000";
 const PAGE_SIZE = 10;

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import { useOutletContext } from "react-router-dom";
+import BranchMap from "../../ui/BranchMap";
 
 // Fix Leaflet default icon broken in bundlers
 delete L.Icon.Default.prototype._getIconUrl;
@@ -15,82 +17,89 @@ function StatusBadge({ active }) {
   return (
     <div className="flex items-center gap-2">
       <span className={`w-2.5 h-2.5 rounded-full ${active ? "bg-green-500" : "bg-red-400"}`} />
-      <span className={`text-base font-semibold ${active ? "text-slate-800" : "text-red-500"}`}>
+      <span className={`text-base font-semibold ${active ? "text-green-600 dark:text-green-400" : "text-red-500"}`}>
         {active ? "Active" : "Inactive"}
       </span>
     </div>
   );
 }
 
-function QueueStatus({ count }) {
+function QueueStatus({ count, dark }) {
   return (
-    <div className="flex items-center gap-3 bg-[rgb(65,15,199)]/10 border border-[rgb(65,15,199)]/20 rounded-xl px-4 py-3">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgb(65,15,199)" strokeWidth="1.8">
+    <div className={`flex items-center gap-3 rounded-xl px-4 py-3 border ${
+      dark
+        ? "bg-violet-500/10 border-violet-500/20 text-violet-400"
+        : "bg-[rgb(65,15,199)]/10 border-[rgb(65,15,199)]/20 text-[rgb(65,15,199)]"
+    }`}>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
         <circle cx="9" cy="7" r="4" />
         <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
       <div>
-        <p className="text-[11px] text-[rgb(65,15,199)]/70 font-semibold uppercase tracking-wider">Queue Status</p>
-        <p className="text-[rgb(65,15,199)] font-bold text-base leading-tight">{count} people waiting</p>
+        <p className="text-[11px] font-semibold uppercase tracking-wider opacity-70">Queue Status</p>
+        <p className="font-bold text-base leading-tight">{count} people waiting</p>
       </div>
     </div>
   );
 }
 
-function DenominationBadge({ amount, currency = "EGP" }) {
+function DenominationBadge({ amount, currency = "EGP", dark }) {
   return (
-    <div className="flex items-center justify-center border border-slate-200 rounded-xl py-3 text-sm font-semibold text-slate-700 bg-white hover:border-[rgb(65,15,199)]/50 hover:text-[rgb(65,15,199)] transition-colors cursor-default">
+    <div className={`flex items-center justify-center border rounded-xl py-3 text-sm font-semibold transition-colors cursor-default ${
+      dark
+        ? "bg-gray-800 border-gray-700 text-gray-300 hover:border-violet-400 hover:text-violet-400"
+        : "bg-white border-slate-200 text-slate-700 hover:border-[rgb(65,15,199)]/50 hover:text-[rgb(65,15,199)]"
+    }`}>
       {amount} {currency}
     </div>
   );
 }
 
-function ATMMap({ lat, lng, label }) {
-  return (
-    <div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-sm" style={{ height: 340 }}>
-      <MapContainer
-        center={[lat, lng]}
-        zoom={15}
-        style={{ height: "100%", width: "100%" }}
-        zoomControl={false}
-        scrollWheelZoom={false}
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={[lat, lng]}>
-          <Popup>{label}</Popup>
-        </Marker>
-      </MapContainer>
-    </div>
-  );
-}
-
-function WithdrawForm({ onSubmit }) {
+function WithdrawForm({ onSubmit, dark }) {
   const [amount, setAmount] = useState("");
   const [showAmt, setShowAmt] = useState(false);
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mt-12">
-      <h2 className="text-lg font-bold text-slate-800 mb-4">Withdraw Cash</h2>
+    <div className={`rounded-2xl border shadow-sm p-6 mt-12 ${
+      dark
+        ? "bg-gray-900 border-gray-700"
+        : "bg-white border-gray-200"
+    }`}>
+      <h2 className={`text-lg font-bold mb-4 ${dark ? "text-white" : "text-gray-900"}`}>
+        Withdraw Cash
+      </h2>
 
-      <label className="block text-sm text-slate-500 mb-2">Amount (EGP)</label>
+      <label className={`block text-sm mb-2 ${dark ? "text-gray-400" : "text-gray-500"}`}>
+        Amount (EGP)
+      </label>
+
       <div className="relative mb-4">
-        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-medium">$</span>
+        <span className={`absolute left-4 top-1/2 -translate-y-1/2 text-sm font-medium ${
+          dark ? "text-gray-500" : "text-slate-400"
+        }`}>
+          $
+        </span>
+
         <input
           type={showAmt ? "text" : "password"}
           placeholder="Enter amount"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          className="w-full pl-9 pr-11 py-3 border border-slate-200 rounded-xl text-slate-700 text-sm
-                     placeholder-slate-300 outline-none focus:border-[rgb(65,15,199)] focus:ring-4 focus:ring-[rgb(65,15,199)]/10 transition-all"
+          className={`w-full pl-9 pr-11 py-3 border rounded-xl text-sm outline-none transition-all
+            focus:border-[rgb(65,15,199)] focus:ring-4 focus:ring-[rgb(65,15,199)]/10 ${
+            dark
+              ? "bg-gray-800 border-gray-600 text-white placeholder:text-gray-600"
+              : "bg-gray-50 border-gray-300 text-gray-800 placeholder:text-slate-300"
+          }`}
         />
+
         <button
           type="button"
           onClick={() => setShowAmt(!showAmt)}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[rgb(65,15,199)] transition-colors"
+          className={`absolute right-3 top-1/2 -translate-y-1/2 transition-colors hover:text-[rgb(65,15,199)] ${
+            dark ? "text-gray-500" : "text-slate-400"
+          }`}
         >
           {showAmt ? (
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -107,7 +116,9 @@ function WithdrawForm({ onSubmit }) {
 
       <button
         onClick={() => amount && onSubmit?.(amount)}
-        className="w-full py-3.5 bg-[rgb(65,15,199)] hover:bg-[rgb(85,35,219)] active:bg-[rgb(45,5,179)] active:scale-[0.98] text-white text-sm font-semibold rounded-xl transition-all duration-150"
+        className="w-full py-3.5 bg-[rgb(65,15,199)] hover:bg-[rgb(85,35,219)]
+                   active:bg-[rgb(45,5,179)] active:scale-[0.98] text-white
+                   text-sm font-semibold rounded-xl transition-all duration-150"
       >
         Proceed to Withdrawal
       </button>
@@ -119,16 +130,21 @@ const ATM_DATA = {
   name: "ATM Details",
   bankName: "Banque Misr",
   location: "Cairo Downtown, Egypt",
-  lat: 30.0444,
-  lng: 31.2357,
+  latitude: 30.0444,
+  longitude: 31.2357,
   active: true,
   queueCount: 4,
   denominations: [200, 100, 50, 20],
 };
 
 export default function ATMDetails({ atm = ATM_DATA }) {
+  const { dark } = useOutletContext();
+  const pageBg = dark ? "bg-gray-950" : "bg-gray-50";
+  const textColor = dark ? "text-white" : "text-gray-900";
+  const subText = dark ? "text-gray-400" : "text-gray-500";
+
   return (
-    <div className="min-h-screen bg-slate-100 px-4 py-10">
+    <div className={`min-h-screen ${pageBg} px-4 py-10`}>
       <div className="max-w-5xl mx-auto">
 
         {/* Header */}
@@ -139,8 +155,8 @@ export default function ATMDetails({ atm = ATM_DATA }) {
             </svg>
           </button>
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">{atm.name}</h1>
-            <p className="text-slate-400 text-sm mt-0.5">{atm.bankName}</p>
+            <h1 className={`text-2xl font-bold ${textColor}`}>{atm.name}</h1>
+            <p className={`text-sm ${subText} mt-0.5`}>{atm.bankName}</p>
           </div>
         </div>
 
@@ -150,26 +166,34 @@ export default function ATMDetails({ atm = ATM_DATA }) {
           {/* Left column */}
           <div className="flex-1">
             <div className="relative">
-              <ATMMap
-                lat={atm.lat}
-                lng={atm.lng}
-                label={atm.location}
+              <BranchMap
+                location={{ latitude: ATM_DATA.latitude, longitude: ATM_DATA.longitude }}
+                dark={dark}
               />
               <div className="relative -mt-6 mx-4 z-[1001]">
-                <WithdrawForm onSubmit={(amt) => alert(`Withdrawing ${amt} EGP`)} />
+                <WithdrawForm
+                  onSubmit={(amt) => alert(`Withdrawing ${amt} EGP`)}
+                  dark={dark}
+                />
               </div>
             </div>
           </div>
 
           {/* Right column */}
-          <div className="w-full lg:w-72 bg-white rounded-2xl border border-slate-200 shadow-sm p-5 flex flex-col gap-5 self-start">
+          <div className={`w-full lg:w-72 rounded-2xl border shadow-sm p-5 flex flex-col gap-5 self-start ${
+            dark
+              ? "bg-gray-900 border-gray-700"
+              : "bg-white border-slate-200"
+          }`}>
             <StatusBadge active={atm.active} />
-            <QueueStatus count={atm.queueCount} />
+            <QueueStatus count={atm.queueCount} dark={dark} />
             <div>
-              <h3 className="text-sm font-bold text-slate-700 mb-3">Denominations</h3>
+              <h3 className={`text-sm font-bold mb-3 ${dark ? "text-gray-200" : "text-slate-700"}`}>
+                Denominations
+              </h3>
               <div className="grid grid-cols-2 gap-2">
                 {atm.denominations.map((d) => (
-                  <DenominationBadge key={d} amount={d} currency="EGP" />
+                  <DenominationBadge key={d} amount={d} currency="EGP" dark={dark} />
                 ))}
               </div>
             </div>

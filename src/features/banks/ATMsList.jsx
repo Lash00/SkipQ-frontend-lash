@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import SortDropdown from "./component/SortDropdown";
 import ATMCard from "./component/ATMCard";
 import DistanceSlider from "./component/DistanceSlider";
+import { useOutletContext } from "react-router-dom";
 
 const ATMS = [
   {
@@ -45,6 +46,11 @@ const ATMS = [
 export default function ATMList({ bankName = "National Bank of Egypt" }) {
   const [distance, setDistance] = useState(2000);
   const [sort, setSort] = useState("nearest");
+  const { dark } = useOutletContext();
+
+  const pageBg = dark ? "bg-gray-950" : "bg-gray-50";
+  const textColor = dark ? "text-white" : "text-gray-900";
+  const subText = dark ? "text-gray-400" : "text-gray-500";
 
   const filtered = useMemo(() => {
     const list = ATMS.filter((a) => a.distanceM <= distance);
@@ -55,39 +61,39 @@ export default function ATMList({ bankName = "National Bank of Egypt" }) {
   }, [distance, sort]);
 
   return (
-    <div className="min-h-screen bg-slate-100 px-4 py-10">
-      <div className="max-w-2xl mx-auto space-y-4">
+    <div className={`min-h-screen ${pageBg} px-4 py-10`}>
+      <div className="w-[90%] mx-auto space-y-4">
 
         {/* Page Header */}
         <div className="flex items-center gap-2 mb-6">
-          
-          <button className="text-slate-400 hover:text-[rgb(65,15,199)] transition-colors">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h1 className="text-lg font-bold text-slate-800">
-            ATM Machines –&nbsp;<span className="text-[rgb(65,15,199)]">{bankName}</span>
+          <h1 className={`text-lg font-bold ${textColor}`}>
+            ATM Machines –&nbsp;
+            <span className="text-[rgb(65,15,199)]">{bankName}</span>
           </h1>
         </div>
 
         {/* Filter Bar */}
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 flex items-end justify-between gap-4">
+        <div className={`rounded-2xl border shadow-sm p-5 flex items-end justify-between gap-4 ${
+          dark
+            ? "bg-gray-900 border-gray-700"
+            : "bg-white border-slate-200"
+        }`}>
           <DistanceSlider
             value={distance}
             min={100}
             max={2000}
             onChange={setDistance}
+            dark={dark}
           />
-          <SortDropdown value={sort} onChange={setSort} />
+          <SortDropdown value={sort} onChange={setSort} dark={dark} />
         </div>
 
         {filtered.length > 0 ? (
           filtered.map((atm) => (
-            <ATMCard key={atm.id} atm={atm} />
+            <ATMCard key={atm.id} atm={atm} dark={dark} />
           ))
         ) : (
-          <div className="text-center py-20 text-slate-400 text-sm">
+          <div className={`text-center py-20 text-sm ${subText}`}>
             No ATMs found within {distance}m.
           </div>
         )}
