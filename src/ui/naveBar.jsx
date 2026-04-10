@@ -4,11 +4,10 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import themesMAP from "../../themes/themes";
-import { NavLink, useLocation } from "react-router-dom";
-
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/services" },
+  // { name: "Services", href: "/#services" },
   { name: "About", href: "/about" },
 ];
 
@@ -16,6 +15,7 @@ export default function Navbar({ dark, setDark }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === "/";
+  const navigate = useNavigate();
 
   // اقفل الموبايل منيو لو الشاشة كبرت
   useEffect(() => {
@@ -28,6 +28,17 @@ export default function Navbar({ dark, setDark }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  function handleServicesClick() {
+    if (location.pathname === "/") {
+      // أنا على الهوم أصلاً، اسكرول مباشرة
+      document
+        .getElementById("services")
+        ?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // روح للهوم وقوله اسكرول على services
+      navigate("/", { state: { scrollTo: "services" } });
+    }
+  }
   return (
     <header className="relative inset-x-0 top-0 z-50">
       <nav className="flex items-center justify-between p-6 w-full lg:max-w-7xl lg:mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,6 +87,15 @@ export default function Navbar({ dark, setDark }) {
               {item.name}
             </NavLink>
           ))}
+          <button
+            onClick={handleServicesClick}
+            className="font-semibold btn"
+            style={{
+              color: dark ? themesMAP["text-light"] : themesMAP["text-dark"],
+            }}
+          >
+            Services
+          </button>
         </div>
 
         {/* Right side */}

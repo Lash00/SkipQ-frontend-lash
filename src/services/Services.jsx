@@ -75,6 +75,7 @@ export default function Services({ dark }) {
           ? themesMAP["light-main-bg"]
           : themesMAP["dark-main-bg"],
       }}
+      id="services"
     >
       <motion.div
         initial={{ opacity: 0, y: 80 }}
@@ -164,44 +165,10 @@ export default function Services({ dark }) {
     </div>
   );
 }
-
-// function Card({ image, dark, name, desc, id }) {
-//   return (
-//     <div
-//       className="rounded-xl shadow-xl border-2 flex flex-col h-full"
-//       style={{ borderColor: dark ? "white" : "#b1b1b1" }}
-//     >
-//       <div className="rounded-xl" style={{ minHeight: "10vh" }}>
-//         <img
-//           src={image}
-//           alt="errro"
-//           className="rounded-t-lg object-fill w-full"
-//         />
-//       </div>
-//       <div
-//         className="w-full p-5 flex-grow"
-//         style={{
-//           color: dark ? themesMAP["text-light"] : themesMAP["text-dark"],
-//         }}
-//       >
-//         <h1 className="text-2xl font-bold">{name}</h1>
-//         <p className="text-md text-[#64748b]  line-clamp-2">{desc}</p>
-//         <button
-//           className="bg-blue-500 text-white px-4 py-2 mt-auto  mt-5 w-full
-//                      rounded hover:bg-blue-600 transition"
-//           onClick={() => id} // here were we will use an funcion for set the servies id
-//         >
-//           Buy Now
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }
-
 function Card({ image, dark, name, desc, id, path, navigate }) {
   return (
     <div
-      className="rounded-xl shadow-xl border-2 flex flex-col h-full"
+      className="rounded-xl shadow-xl border-2 flex flex-col h-full "
       style={{
         borderColor: "#b1b1b1",
         backgroundColor: dark ? "#0f172a" : themesMAP["dark-main-bg"],
