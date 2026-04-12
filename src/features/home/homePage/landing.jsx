@@ -1,7 +1,12 @@
+import { useRef } from "react";
 import themesMAP from "../../../../themes/themes";
 import { NavLink } from "react-router-dom";
+import Lottie from "lottie-react";
+import waiting from "../../../../public/animation/Waiting.json";
 
 export default function Landing({ dark }) {
+  const lottieRef = useRef();
+
   return (
     <div
       className="p-6 w-full lg:max-w-7xl lg:mx-auto px-4 sm:px-6 lg:px-8"
@@ -62,14 +67,19 @@ export default function Landing({ dark }) {
           </div>
         </div>
 
-        {/* Right - Image */}
+        {/* Right - Lottie بدل الصورة */}
         <div className="flex items-stretch">
-          <img
-            src="/images/landing.png"
-            alt="Skip Q preview"
-            className="rounded-lg w-full object-cover"
-            style={{ maxHeight: "90vh", objectPosition: "60% center" }}
-          />
+          <div
+            className="w-full rounded-lg overflow-hidden"
+            style={{ maxHeight: "90vh", height: "100%" }}
+          >
+            <Lottie
+              lottieRef={lottieRef}
+              animationData={waiting}
+              loop={true}
+              style={{ width: "100%", height: "100%" }}
+            />
+          </div>
         </div>
       </div>
     </div>

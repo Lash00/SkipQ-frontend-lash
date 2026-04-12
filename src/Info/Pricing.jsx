@@ -2,7 +2,12 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon, faSun, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMoon,
+  faSun,
+  faCheck,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import themesMAP from "../../themes/themes";
 
 const plans = [
@@ -91,34 +96,78 @@ export default function Pricing() {
   return (
     <div style={{ backgroundColor: bg, minHeight: "100vh" }}>
       {/* Navbar */}
-      <header className="sticky top-0 z-50"
-        style={{ backgroundColor: bg, borderBottom: `1px solid ${dark ? "#1e293b" : "#e2e8f0"}` }}>
+      <header
+        className="sticky top-0 z-50"
+        style={{
+          backgroundColor: bg,
+          borderBottom: `1px solid ${dark ? "#1e293b" : "#e2e8f0"}`,
+        }}
+      >
         <nav className="flex items-center justify-between p-4 lg:max-w-7xl lg:mx-auto px-4 sm:px-6 lg:px-8">
           <NavLink to="/" className="flex gap-3 items-baseline">
-            <button type="button" style={{ backgroundColor: "rgb(65, 15, 199)" }}
-              className="text-white rounded-xl border border-transparent shadow-xs font-medium text-sm px-4 py-2.5">
-              S
-            </button>
-            <h1 className="text-2xl font-bold" style={{ color: text }}>Skip Q</h1>
+            {/* Logo */}
+            <div className="flex lg:flex-1 gap-3 items-center">
+              <button
+                type="button"
+                style={{ backgroundColor: "rgb(65, 15, 199)" }}
+                className="text-white rounded-xl border border-transparent shadow-xs font-medium text-sm px-4 py-2.5 "
+              >
+                <img
+                  src="/public/images/whiteLogo.png"
+                  alt="Connection Error"
+                  className="w-full w-[50px]"
+                />
+              </button>
+              <h1
+                className="text-2xl font-bold"
+                style={{
+                  color: dark
+                    ? themesMAP["text-light"]
+                    : themesMAP["text-dark"],
+                }}
+              >
+                SkipQ
+              </h1>
+            </div>
           </NavLink>
-          <button onClick={() => setDark((prev) => {
-            const next = !prev;
-            localStorage.setItem("isDark", JSON.stringify(next));
-            return next;
-          })}>
-            <FontAwesomeIcon icon={dark ? faSun : faMoon} size="lg" style={{ color: text }} />
+          <button
+            onClick={() =>
+              setDark((prev) => {
+                const next = !prev;
+                localStorage.setItem("isDark", JSON.stringify(next));
+                return next;
+              })
+            }
+          >
+            <FontAwesomeIcon
+              icon={dark ? faSun : faMoon}
+              size="lg"
+              style={{ color: text }}
+            />
           </button>
         </nav>
       </header>
 
       {/* Hero */}
       <section className="lg:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12 text-center">
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-          <span className="inline-block text-xs font-semibold tracking-widest uppercase px-4 py-1 rounded-full mb-6"
-            style={{ backgroundColor: dark ? "#1e293b" : "#ede9fe", color: "#410fc7" }}>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          <span
+            className="inline-block text-xs font-semibold tracking-widest uppercase px-4 py-1 rounded-full mb-6"
+            style={{
+              backgroundColor: dark ? "#1e293b" : "#ede9fe",
+              color: "#410fc7",
+            }}
+          >
             Pricing
           </span>
-          <h1 className="text-4xl sm:text-5xl font-extrabold mb-4" style={{ color: text }}>
+          <h1
+            className="text-4xl sm:text-5xl font-extrabold mb-4"
+            style={{ color: text }}
+          >
             Simple, transparent pricing
           </h1>
           <p className="text-lg max-w-xl mx-auto" style={{ color: muted }}>
@@ -131,29 +180,56 @@ export default function Pricing() {
       <section className="lg:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           {plans.map((plan, i) => (
-            <motion.div key={i} custom={i} initial="hidden" whileInView="visible"
-              viewport={{ once: true }} variants={fadeUp}
+            <motion.div
+              key={i}
+              custom={i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
               className="rounded-2xl p-8"
               style={{
                 backgroundColor: plan.highlight ? "rgb(65, 15, 199)" : cardBg,
                 boxShadow: plan.highlight
                   ? "0 8px 40px rgba(65,15,199,0.4)"
-                  : dark ? "0 4px 24px rgba(0,0,0,0.3)" : "0 4px 24px rgba(0,0,0,0.07)",
+                  : dark
+                    ? "0 4px 24px rgba(0,0,0,0.3)"
+                    : "0 4px 24px rgba(0,0,0,0.07)",
                 transform: plan.highlight ? "scale(1.04)" : "scale(1)",
-              }}>
-              <h3 className="text-lg font-bold mb-1"
-                style={{ color: plan.highlight ? "#fff" : text }}>{plan.name}</h3>
-              <p className="text-sm mb-6" style={{ color: plan.highlight ? "#c4b5fd" : muted }}>
+              }}
+            >
+              <h3
+                className="text-lg font-bold mb-1"
+                style={{ color: plan.highlight ? "#fff" : text }}
+              >
+                {plan.name}
+              </h3>
+              <p
+                className="text-sm mb-6"
+                style={{ color: plan.highlight ? "#c4b5fd" : muted }}
+              >
                 {plan.description}
               </p>
               <div className="flex items-end gap-1 mb-8">
                 {plan.price !== "Custom" && (
-                  <span className="text-sm" style={{ color: plan.highlight ? "#c4b5fd" : muted }}>EGP</span>
+                  <span
+                    className="text-sm"
+                    style={{ color: plan.highlight ? "#c4b5fd" : muted }}
+                  >
+                    EGP
+                  </span>
                 )}
-                <span className="text-4xl font-black"
-                  style={{ color: plan.highlight ? "#fff" : text }}>{plan.price}</span>
+                <span
+                  className="text-4xl font-black"
+                  style={{ color: plan.highlight ? "#fff" : text }}
+                >
+                  {plan.price}
+                </span>
                 {plan.period && (
-                  <span className="text-sm mb-1" style={{ color: plan.highlight ? "#c4b5fd" : muted }}>
+                  <span
+                    className="text-sm mb-1"
+                    style={{ color: plan.highlight ? "#c4b5fd" : muted }}
+                  >
                     /{plan.period}
                   </span>
                 )}
@@ -163,21 +239,43 @@ export default function Pricing() {
                   <li key={j} className="flex items-center gap-3">
                     <FontAwesomeIcon
                       icon={feat.included ? faCheck : faXmark}
-                      style={{ color: feat.included ? (plan.highlight ? "#a5f3fc" : "#410fc7") : (plan.highlight ? "#c4b5fd" : muted) }}
+                      style={{
+                        color: feat.included
+                          ? plan.highlight
+                            ? "#a5f3fc"
+                            : "#410fc7"
+                          : plan.highlight
+                            ? "#c4b5fd"
+                            : muted,
+                      }}
                     />
-                    <span className="text-sm"
-                      style={{ color: plan.highlight ? (feat.included ? "#fff" : "#c4b5fd") : (feat.included ? text : muted) }}>
+                    <span
+                      className="text-sm"
+                      style={{
+                        color: plan.highlight
+                          ? feat.included
+                            ? "#fff"
+                            : "#c4b5fd"
+                          : feat.included
+                            ? text
+                            : muted,
+                      }}
+                    >
                       {feat.text}
                     </span>
                   </li>
                 ))}
               </ul>
               <NavLink to={plan.ctaLink}>
-                <button className="w-full rounded-xl font-semibold py-3 transition-opacity hover:opacity-90"
+                <button
+                  className="w-full rounded-xl font-semibold py-3 transition-opacity hover:opacity-90"
                   style={{
-                    backgroundColor: plan.highlight ? "#fff" : "rgb(65, 15, 199)",
+                    backgroundColor: plan.highlight
+                      ? "#fff"
+                      : "rgb(65, 15, 199)",
                     color: plan.highlight ? "rgb(65, 15, 199)" : "#fff",
-                  }}>
+                  }}
+                >
                   {plan.cta}
                 </button>
               </NavLink>

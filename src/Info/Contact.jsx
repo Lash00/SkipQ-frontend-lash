@@ -55,12 +55,31 @@ export default function Contact() {
       <header className="sticky top-0 z-50"
         style={{ backgroundColor: bg, borderBottom: `1px solid ${dark ? "#1e293b" : "#e2e8f0"}` }}>
         <nav className="flex items-center justify-between p-4 lg:max-w-7xl lg:mx-auto px-4 sm:px-6 lg:px-8">
-          <NavLink to="/" className="flex gap-3 items-baseline">
-            <button type="button" style={{ backgroundColor: "rgb(65, 15, 199)" }}
-              className="text-white rounded-xl border border-transparent shadow-xs font-medium text-sm px-4 py-2.5">
-              S
-            </button>
-            <h1 className="text-2xl font-bold" style={{ color: text }}>Skip Q</h1>
+           <NavLink to="/" className="flex gap-3 items-baseline">
+            {/* Logo */}
+            <div className="flex lg:flex-1 gap-3 items-center">
+              <button
+                type="button"
+                style={{ backgroundColor: "rgb(65, 15, 199)" }}
+                className="text-white rounded-xl border border-transparent shadow-xs font-medium text-sm px-4 py-2.5 "
+              >
+                <img
+                  src="/public/images/whiteLogo.png"
+                  alt="Connection Error"
+                  className="w-full w-[50px]"
+                />
+              </button>
+              <h1
+                className="text-2xl font-bold"
+                style={{
+                  color: dark
+                    ? themesMAP["text-light"]
+                    : themesMAP["text-dark"],
+                }}
+              >
+                SkipQ
+              </h1>
+            </div>
           </NavLink>
           <button onClick={() => setDark((prev) => {
             const next = !prev;

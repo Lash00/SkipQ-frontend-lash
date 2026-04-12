@@ -2,7 +2,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon, faSun, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMoon,
+  faSun,
+  faChevronDown,
+} from "@fortawesome/free-solid-svg-icons";
 import themesMAP from "../../themes/themes";
 
 const faqs = [
@@ -69,34 +73,78 @@ export default function FAQ() {
   return (
     <div style={{ backgroundColor: bg, minHeight: "100vh" }}>
       {/* Navbar */}
-      <header className="sticky top-0 z-50"
-        style={{ backgroundColor: bg, borderBottom: `1px solid ${dark ? "#1e293b" : "#e2e8f0"}` }}>
+      <header
+        className="sticky top-0 z-50"
+        style={{
+          backgroundColor: bg,
+          borderBottom: `1px solid ${dark ? "#1e293b" : "#e2e8f0"}`,
+        }}
+      >
         <nav className="flex items-center justify-between p-4 lg:max-w-7xl lg:mx-auto px-4 sm:px-6 lg:px-8">
           <NavLink to="/" className="flex gap-3 items-baseline">
-            <button type="button" style={{ backgroundColor: "rgb(65, 15, 199)" }}
-              className="text-white rounded-xl border border-transparent shadow-xs font-medium text-sm px-4 py-2.5">
-              S
-            </button>
-            <h1 className="text-2xl font-bold" style={{ color: text }}>Skip Q</h1>
+            {/* Logo */}
+            <div className="flex lg:flex-1 gap-3 items-center">
+              <button
+                type="button"
+                style={{ backgroundColor: "rgb(65, 15, 199)" }}
+                className="text-white rounded-xl border border-transparent shadow-xs font-medium text-sm px-4 py-2.5 "
+              >
+                <img
+                  src="/public/images/whiteLogo.png"
+                  alt="Connection Error"
+                  className="w-full w-[50px]"
+                />
+              </button>
+              <h1
+                className="text-2xl font-bold"
+                style={{
+                  color: dark
+                    ? themesMAP["text-light"]
+                    : themesMAP["text-dark"],
+                }}
+              >
+                SkipQ
+              </h1>
+            </div>
           </NavLink>
-          <button onClick={() => setDark((prev) => {
-            const next = !prev;
-            localStorage.setItem("isDark", JSON.stringify(next));
-            return next;
-          })}>
-            <FontAwesomeIcon icon={dark ? faSun : faMoon} size="lg" style={{ color: text }} />
+          <button
+            onClick={() =>
+              setDark((prev) => {
+                const next = !prev;
+                localStorage.setItem("isDark", JSON.stringify(next));
+                return next;
+              })
+            }
+          >
+            <FontAwesomeIcon
+              icon={dark ? faSun : faMoon}
+              size="lg"
+              style={{ color: text }}
+            />
           </button>
         </nav>
       </header>
 
       {/* Hero */}
       <section className="lg:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12 text-center">
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-          <span className="inline-block text-xs font-semibold tracking-widest uppercase px-4 py-1 rounded-full mb-6"
-            style={{ backgroundColor: dark ? "#1e293b" : "#ede9fe", color: "#410fc7" }}>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          <span
+            className="inline-block text-xs font-semibold tracking-widest uppercase px-4 py-1 rounded-full mb-6"
+            style={{
+              backgroundColor: dark ? "#1e293b" : "#ede9fe",
+              color: "#410fc7",
+            }}
+          >
             FAQ
           </span>
-          <h1 className="text-4xl sm:text-5xl font-extrabold mb-4" style={{ color: text }}>
+          <h1
+            className="text-4xl sm:text-5xl font-extrabold mb-4"
+            style={{ color: text }}
+          >
             Frequently asked questions
           </h1>
           <p className="text-lg max-w-xl mx-auto" style={{ color: muted }}>
@@ -108,19 +156,41 @@ export default function FAQ() {
       {/* Accordion */}
       <section className="lg:max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         {faqs.map((faq, i) => (
-          <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ delay: i * 0.07, duration: 0.4 }}
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.07, duration: 0.4 }}
             className="mb-4 rounded-2xl overflow-hidden"
-            style={{ backgroundColor: cardBg, boxShadow: dark ? "0 2px 12px rgba(0,0,0,0.3)" : "0 2px 12px rgba(0,0,0,0.06)" }}>
+            style={{
+              backgroundColor: cardBg,
+              boxShadow: dark
+                ? "0 2px 12px rgba(0,0,0,0.3)"
+                : "0 2px 12px rgba(0,0,0,0.06)",
+            }}
+          >
             <button
               onClick={() => setOpenIndex(openIndex === i ? null : i)}
-              className="w-full flex items-center justify-between p-6 text-left">
-              <span className="font-semibold text-base pr-4" style={{ color: text }}>
+              className="w-full flex items-center justify-between p-6 text-left"
+            >
+              <span
+                className="font-semibold text-base pr-4"
+                style={{ color: text }}
+              >
                 {faq.question}
               </span>
-              <motion.div animate={{ rotate: openIndex === i ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                <FontAwesomeIcon icon={faChevronDown}
-                  style={{ color: openIndex === i ? "#410fc7" : muted, flexShrink: 0 }} />
+              <motion.div
+                animate={{ rotate: openIndex === i ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <FontAwesomeIcon
+                  icon={faChevronDown}
+                  style={{
+                    color: openIndex === i ? "#410fc7" : muted,
+                    flexShrink: 0,
+                  }}
+                />
               </motion.div>
             </button>
             <AnimatePresence initial={false}>
@@ -130,8 +200,12 @@ export default function FAQ() {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.35, ease: "easeInOut" }}>
-                  <p className="px-6 pb-6 text-sm leading-relaxed" style={{ color: muted }}>
+                  transition={{ duration: 0.35, ease: "easeInOut" }}
+                >
+                  <p
+                    className="px-6 pb-6 text-sm leading-relaxed"
+                    style={{ color: muted }}
+                  >
                     {faq.answer}
                   </p>
                 </motion.div>

@@ -43,16 +43,28 @@ export default function Footer({ dark }) {
         <div className="p-6 w-full lg:max-w-7xl lg:mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 mt-16">
           {/* Brand */}
           <div>
-            <div className="flex gap-3 items-baseline">
+            {/* Logo */}
+            <div className="flex lg:flex-1 gap-3 items-center">
               <button
                 type="button"
                 style={{ backgroundColor: "rgb(65, 15, 199)" }}
-                className="text-white rounded-xl border border-transparent shadow-xs font-medium leading-5 text-sm px-4 py-2.5 focus:outline-none"
+                className="text-white rounded-xl border border-transparent shadow-xs font-medium text-sm px-4 py-2.5 "
               >
-                S
+                <img
+                  src="/public/images/whiteLogo.png"
+                  alt="Connection Error"
+                  className="w-full w-[50px]"
+                />
               </button>
-              <h1 className="text-2xl font-bold" style={{ color: text }}>
-                Skip Q
+              <h1
+                className="text-2xl font-bold"
+                style={{
+                  color: dark
+                    ? themesMAP["text-light"]
+                    : themesMAP["text-dark"],
+                }}
+              >
+                SkipQ
               </h1>
             </div>
             <p className="text-md text-[#9e9fa1] w-[90%] mt-3">

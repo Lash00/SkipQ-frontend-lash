@@ -43,13 +43,17 @@ export default function Navbar({ dark, setDark }) {
     <header className="relative inset-x-0 top-0 z-50">
       <nav className="flex items-center justify-between p-6 w-full lg:max-w-7xl lg:mx-auto px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <div className="flex lg:flex-1 gap-3 items-baseline">
+        <div className="flex lg:flex-1 gap-3 items-center">
           <button
             type="button"
             style={{ backgroundColor: "rgb(65, 15, 199)" }}
-            className="text-white rounded-xl border border-transparent shadow-xs font-medium text-sm px-4 py-2.5"
+            className="text-white rounded-xl border border-transparent shadow-xs font-medium text-sm px-4 py-2.5 "
           >
-            S
+            <img
+              src="/public/images/whiteLogo.png"
+              alt="Connection Error"
+              className="w-full w-[50px]"
+            />
           </button>
           <h1
             className="text-2xl font-bold"
@@ -57,7 +61,7 @@ export default function Navbar({ dark, setDark }) {
               color: dark ? themesMAP["text-light"] : themesMAP["text-dark"],
             }}
           >
-            Skip Q
+            SkipQ
           </h1>
         </div>
 

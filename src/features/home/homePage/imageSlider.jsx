@@ -65,7 +65,7 @@ export default function ImageSlider({ dark }) {
         >
           <SwiperSlide>
             <img
-              src="/images/1.png"
+              src="/images/1.jpeg"
               alt="Slide 1"
               className="w-full h-full object-fill rounded-lg"
             />
@@ -73,7 +73,7 @@ export default function ImageSlider({ dark }) {
 
           <SwiperSlide>
             <img
-              src="/images/2.png"
+              src="/images/2.jpeg"
               alt="Slide 2"
               className="w-full h-full object-fill rounded-lg"
             />
@@ -81,12 +81,12 @@ export default function ImageSlider({ dark }) {
 
           <SwiperSlide>
             <img
-              src="/images/3.png"
+              src="/images/3.jpeg"
               alt="Slide 3"
               className="w-full h-full object-fill rounded-lg"
             />
           </SwiperSlide>
-
+          {/* 
           <SwiperSlide>
             <img
               src="/images/4.png"
@@ -101,7 +101,7 @@ export default function ImageSlider({ dark }) {
               alt="Slide 5"
               className="w-full h-full object-fill rounded-lg"
             />
-          </SwiperSlide>
+          </SwiperSlide> */}
         </Swiper>
         <div className="my-custom-pagination mt-6"></div>
       </motion.div>

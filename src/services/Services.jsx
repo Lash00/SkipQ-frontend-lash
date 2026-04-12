@@ -28,24 +28,24 @@ export default function Services({ dark }) {
       //   description_ar: "ابحث عن أقرب فرع بنك في منطقتك",
       org_description: "Find the nearest bank branch in your area",
     },
-    {
-      service_id: 7,
-      //   name_ar: "الأحوال المدنية",
-      org_name: "Civil Status",
-      type: "civil_status",
-      org_image: "/service_images/Civil_Registry.jpg",
-      //   description_ar: "خدمات الأحوال المدنية والوثائق الرسمية",
-      org_description: "Civil status services and official documents",
-    },
-    {
-      service_id: 8,
-      //   name_ar: "الأحوال المدنية",
-      org_name: "Lash org",
-      type: "lash",
-      org_image: "/service_images/Lash_company.png",
-      //   description_ar: "خدمات الأحوال المدنية والوثائق الرسمية",
-      org_description: "Lash company for software Solutions",
-    },
+    // {
+    //   service_id: 7,
+    //   //   name_ar: "الأحوال المدنية",
+    //   org_name: "Civil Status",
+    //   type: "civil_status",
+    //   org_image: "/service_images/Civil_Registry.jpg",
+    //   //   description_ar: "خدمات الأحوال المدنية والوثائق الرسمية",
+    //   org_description: "Civil status services and official documents",
+    // },
+    // {
+    //   service_id: 8,
+    //   //   name_ar: "الأحوال المدنية",
+    //   org_name: "Lash org",
+    //   type: "lash",
+    //   org_image: "/service_images/Lash_company.png",
+    //   //   description_ar: "خدمات الأحوال المدنية والوثائق الرسمية",
+    //   org_description: "Lash company for software Solutions",
+    // },
   ];
   //test animation effect
   const cardVariants = {
