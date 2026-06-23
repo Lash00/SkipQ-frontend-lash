@@ -39,29 +39,50 @@ function CivilRegistry() {
   const [showLocationModal, setShowLocationModal] = useState(true);
   const [locationLoading, setLocationLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const [branchRes, locationRes] = await Promise.all([
-          axios.get(`${BASE_URL}/branch`),
-          axios.get(`${BASE_URL}/location`),
-        ]);
-        setBranches(branchRes.data);
-        setLocations(locationRes.data);
-      } catch (err) {
-        setError(
-          "Failed to load branches. Make sure json-server is running on port 8000.",
-        );
-        console.error("API Error:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       setLoading(true);
+  //       setError(null);
+  //       const [branchRes, locationRes] = await Promise.all([
+  //         axios.get(`${BASE_URL}/branch`),
+  //         axios.get(`${BASE_URL}/location`),
+  //       ]);
+  //       setBranches(branchRes.data);
+  //       setLocations(locationRes.data);
+  //     } catch (err) {
+  //       setError(
+  //         "Failed to load branches. Make sure json-server is running on port 8000.",
+  //       );
+  //       console.error("API Error:", err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
+
+  useEffect(() => {
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await axios.get("/data.json");
+
+      setBranches(response.data.branch);
+      setLocations(response.data.location);
+    } catch (err) {
+      setError("Failed to load data.");
+      console.error("API Error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchData();
+}, []);
   // ---------------------------------------------------------------------------
   // Location handlers
   // المودال مش بيتقفل عند الضغط على Allow —

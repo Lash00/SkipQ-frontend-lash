@@ -22,33 +22,72 @@ function BranchDetails() {
   const [searchService, setSearchService] = useState("");
   const [selectedService, setSelectedService] = useState(null);
 
+  // useEffect(() => {
+  //   const fetchAll = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const branchRes = await axios.get(`${BASE_URL}/branch?branch_id=${id}`);
+  //       setBranch(branchRes.data[0]);
+
+  //       const locationRes = await axios.get(
+  //         `${BASE_URL}/location?location_id=${branchRes.data[0].location_id}`,
+  //       );
+  //       setLocation(locationRes.data[0]);
+
+  //       const servicesRes = await axios.get(`${BASE_URL}/services`);
+  //       setServices(servicesRes.data);
+  //     } catch (err) {
+  //       setError("Failed to load branch details.");
+  //       console.error(err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchAll();
+  // }, [id]);
+
+  // const filteredServices = services.filter((s) =>
+  //   s.service_name.toLowerCase().includes(searchService.toLowerCase()),
+  // );
+
+
   useEffect(() => {
-    const fetchAll = async () => {
-      try {
-        setLoading(true);
-        const branchRes = await axios.get(`${BASE_URL}/branch?branch_id=${id}`);
-        setBranch(branchRes.data[0]);
+  const fetchAll = async () => {
+    try {
+      setLoading(true);
 
-        const locationRes = await axios.get(
-          `${BASE_URL}/location?location_id=${branchRes.data[0].location_id}`,
-        );
-        setLocation(locationRes.data[0]);
+      const response = await axios.get("/data.json");
+      const data = response.data;
 
-        const servicesRes = await axios.get(`${BASE_URL}/services`);
-        setServices(servicesRes.data);
-      } catch (err) {
-        setError("Failed to load branch details.");
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchAll();
-  }, [id]);
+      const currentBranch = data.branch.find(
+        (b) => String(b.branch_id) === String(id)
+      );
 
-  const filteredServices = services.filter((s) =>
-    s.service_name.toLowerCase().includes(searchService.toLowerCase()),
-  );
+      setBranch(currentBranch);
+
+      const currentLocation = data.location.find(
+        (l) => l.location_id === currentBranch?.location_id
+      );
+
+      setLocation(currentLocation);
+
+      setServices(data.services);
+    } catch (err) {
+      setError("Failed to load branch details.");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchAll();
+}, [id]);
+
+const filteredServices = services.filter((s) =>
+  s.service_name
+    .toLowerCase()
+    .includes(searchService.toLowerCase())
+);
 
   const pageBg = dark ? "bg-gray-950" : "bg-gray-50";
   const textColor = dark ? "text-white" : "text-gray-900";
