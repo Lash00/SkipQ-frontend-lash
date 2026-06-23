@@ -43,7 +43,7 @@ const ATMS_BASE = [
   },
 ];
 
-const MAX_DISTANCE = 2000; // meters
+const MAX_DISTANCE = 500000; // meters
 
 function getDistanceMeters(lat1, lng1, lat2, lng2) {
   const R = 6371000;
