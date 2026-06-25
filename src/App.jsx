@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
-
+import {Navigate} from "react-router-dom";
 import HomePage from "./features/home/HomePage";
 import HomeContent from "./features/home/HomeContent";
 import CivilRegistry from "./features/civil-registry/CivilRegistry";
@@ -14,6 +14,10 @@ import PageNotFound from "./ui/PageNotFound";
 import BranchDetails from "./features/civil-registry/BranchDetails";
 import ScrollToTop from "./ui/ScrollToTop";
 import SetPassword from "./features/auth/SetPassword";
+import DeveloperDashboard from "./features/dashboards/DeveloperDashboard";
+import SignupRequests from "./features/dashboards/SignupRequests";
+import Team from "./features/dashboards/Team";
+import Logs from "./features/dashboards/Logs";
 // Info pages
 // import HowItWorks from "./Info/HowItWorks";
 import HowItWorks from "./info/HowItWorks";
@@ -48,7 +52,13 @@ function App() {
             path="/registration-guidelines"
             element={<RegesterationGuidelines />}
           />
-
+            <Route path="/devDashboard" element={<DeveloperDashboard />}>
+              <Route index element={<Navigate to="signup-requests" replace />} />
+              <Route path="signup-requests" element={<SignupRequests />} />
+              <Route path="team"            element={<Team />} />
+              <Route path="logs"            element={<Logs />} />
+            </Route>
+          
           {/* Info pages (standalone with their own minimal navbar) */}
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/pricing" element={<Pricing />} />
