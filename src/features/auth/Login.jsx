@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import themesMAP from "../../../themes/themes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,8 +9,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
-import useAuth from "../../contexts/useAuth";
 import Navbar from "../../ui/naveBar"; // adjust path if needed
+import useAuth from "../../contexts/useAuth"; // <-- عدّل المسار على حسب مكان الملف عندك
 
 const fadeSlideUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -24,17 +24,46 @@ const fadeSlideDown = (delay = 0) => ({
   transition: { duration: 0.45, delay, ease: "easeOut" },
 });
 
+// -----------------------------------------------------------------------
+// بيحدد المستخدم بعد تسجيل الدخول يتوجه على فين، على حسب الـ role
+// (و sector لو سوبر أدمن). عدّل المسارات دي لو أسامي الراوتس عندك مختلفة.
+// -----------------------------------------------------------------------
+/*
+
+  { role_id: 1, role_name: "Super Admin" },
+  { role_id: 2, role_name: "Branch Manager" },
+  { role_id: 11, role_name: "Developer" },
+
+*/
+function getRedirectPath(user) {
+  if (!user) return "/";
+
+  if (user.role === "Developer") {
+    return "/devDashboard";
+  }
+  if (user.role === "Super Admin") {
+    // نفس الكومبوننت بتاع الداش بورد، بس هو اللي بيقرأ sector من user
+    // عشان يقرر يعرض سيكشن ATMs (بنوك) أو لأ (سجل مدني).
+    return "/superDashboard";
+  }
+  if (user.role === "Branch Manager") {
+    return "/branchDashboard";
+  }
+  return "/";
+}
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [dark, setDark] = useState(() => {
     return JSON.parse(localStorage.getItem("isDark") ?? "false");
   });
 
+  const navigate = useNavigate();
   const { login } = useAuth();
 
   useEffect(() => {
@@ -47,14 +76,15 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    setLoading(true);
+    setSubmitting(true);
 
     try {
-      await login(email, password);
+      const user = await login({ email, password });
+      navigate(getRedirectPath(user), { replace: true });
     } catch (err) {
       setError(err.message || "Something went wrong");
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
 
@@ -297,7 +327,7 @@ export default function Login() {
 
               <motion.button
                 type="submit"
-                disabled={loading}
+                disabled={submitting}
                 className="w-full py-3 text-white font-semibold text-sm rounded-xl flex items-center justify-center gap-2 transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
                 style={{ backgroundColor: primary }}
                 {...fadeSlideUp(0.7)}
@@ -306,7 +336,7 @@ export default function Login() {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <AnimatePresence mode="wait">
-                  {loading ? (
+                  {submitting ? (
                     <motion.span
                       key="spinner"
                       initial={{ opacity: 0, rotate: -90 }}
