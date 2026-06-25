@@ -22,6 +22,8 @@ import DeveloperDashboard from "./features/dashboards/developer-dashboard/Develo
 import SignupRequests from "./features/dashboards/developer-dashboard/SignupRequests";
 import Team from "./features/dashboards/developer-dashboard/Team";
 import Logs from "./features/dashboards/developer-dashboard/Logs";
+// import ProtectedRoute from "./features/dashboards/developer-dashboard/ProtectedRoute";
+import PublicRoute from "./PublicRoute";
 
 // Super Admin Dashboard
 import SuperAdminLayout from "./features/dashboards/super-Admin/components/SuperAdminLayout";
@@ -67,28 +69,21 @@ function App() {
 
           {/* ================= Authentication ================= */}
 
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/setPassword/:token" element={<SetPassword />} />
+          <Route element={<PublicRoute />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/setPassword/:token" element={<SetPassword />} />
+          </Route>
           <Route
             path="/registration-guidelines"
             element={<RegesterationGuidelines />}
           />
-
-          {/* ================= Developer Dashboard ================= */}
-
           <Route path="/devDashboard" element={<DeveloperDashboard />}>
             <Route index element={<Navigate to="signup-requests" replace />} />
-
             <Route path="signup-requests" element={<SignupRequests />} />
-
             <Route path="team" element={<Team />} />
-
             <Route path="logs" element={<Logs />} />
           </Route>
-
-          {/* ================= Super Admin Dashboard ================= */}
-
           <Route
             path="/superDashboard"
             element={
@@ -115,8 +110,7 @@ function App() {
               ...
           </Route> */}
 
-          {/* ================= Info ================= */}
-
+          {/* Info pages (standalone with their own minimal navbar) */}
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/faq" element={<FAQ />} />

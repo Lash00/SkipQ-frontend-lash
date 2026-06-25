@@ -1,14 +1,4 @@
 import {
-  Search,
-  Download,
-  LayoutDashboard,
-  Activity,
-  BarChart3,
-  Users,
-  FileText,
-  LogOut,
-  Moon,
-  Sun,
   X,
   Mail,
   Phone,
@@ -16,13 +6,14 @@ import {
   Building2,
   TriangleAlert,
   Send,
-  Menu,
+  CheckCircle,
+  XCircle,
 } from "lucide-react";
-
 import themesMAP from "../../../../themes/themes";
 import { motion, AnimatePresence } from "framer-motion";
 import StatusBadge from "./StatusBadge";
-function DetailsDrawer({ item, onClose, dark }) {
+
+function DetailsDrawer({ item, onClose, dark, onStatusChange }) {
   if (!item) return null;
 
   const text = dark ? themesMAP["text-light"] : themesMAP["text-dark"];
@@ -30,6 +21,18 @@ function DetailsDrawer({ item, onClose, dark }) {
   const cardBg = dark ? "#1e293b" : "#ffffff";
   const border = dark ? "#334155" : "#e2e8f0";
   const primary = "#410fc7";
+
+  const handleApprove = () => {
+    onStatusChange(item.id, "active");
+  };
+
+  const handleReject = () => {
+    onStatusChange(item.id, "rejected");
+  };
+
+  const handleSuspend = () => {
+    onStatusChange(item.id, "suspended");
+  };
 
   return (
     <AnimatePresence>
@@ -57,7 +60,10 @@ function DetailsDrawer({ item, onClose, dark }) {
             }}
           >
             <div className="flex items-center justify-between">
-              <h3 className="text-lg sm:text-xl font-bold" style={{ color: text }}>
+              <h3
+                className="text-lg sm:text-xl font-bold"
+                style={{ color: text }}
+              >
                 Organization Details
               </h3>
               <button onClick={onClose} style={{ color: muted }}>
@@ -72,7 +78,10 @@ function DetailsDrawer({ item, onClose, dark }) {
             </div>
 
             <div className="mb-5">
-              <h4 className="text-xl sm:text-2xl font-bold mb-1" style={{ color: text }}>
+              <h4
+                className="text-xl sm:text-2xl font-bold mb-1"
+                style={{ color: text }}
+              >
                 {item.organization}
               </h4>
               <p className="text-sm" style={{ color: muted }}>
@@ -88,7 +97,10 @@ function DetailsDrawer({ item, onClose, dark }) {
                     <p className="text-xs" style={{ color: muted }}>
                       Contact Email
                     </p>
-                    <p className="font-semibold text-sm break-all" style={{ color: text }}>
+                    <p
+                      className="font-semibold text-sm break-all"
+                      style={{ color: text }}
+                    >
                       {item.email}
                     </p>
                   </div>
@@ -137,7 +149,10 @@ function DetailsDrawer({ item, onClose, dark }) {
                     <p className="text-xs" style={{ color: muted }}>
                       Branches
                     </p>
-                    <p className="text-xl sm:text-2xl font-bold" style={{ color: primary }}>
+                    <p
+                      className="text-xl sm:text-2xl font-bold"
+                      style={{ color: primary }}
+                    >
                       {item.branches}
                     </p>
                   </div>
@@ -146,7 +161,10 @@ function DetailsDrawer({ item, onClose, dark }) {
                     <p className="text-xs" style={{ color: muted }}>
                       ATMs
                     </p>
-                    <p className="text-xl sm:text-2xl font-bold" style={{ color: primary }}>
+                    <p
+                      className="text-xl sm:text-2xl font-bold"
+                      style={{ color: primary }}
+                    >
                       {item.atms}
                     </p>
                   </div>
@@ -177,6 +195,28 @@ function DetailsDrawer({ item, onClose, dark }) {
                 </div>
               </div>
 
+              {item.status === "pending" && (
+                <div className="pt-2 space-y-3">
+                  <button
+                    onClick={handleApprove}
+                    className="w-full rounded-xl py-3 font-semibold text-white flex items-center justify-center gap-2 text-sm"
+                    style={{ backgroundColor: "#16a34a" }}
+                  >
+                    <CheckCircle size={16} />
+                    Approve Request
+                  </button>
+
+                  <button
+                    onClick={handleReject}
+                    className="w-full rounded-xl py-3 font-semibold text-white flex items-center justify-center gap-2 text-sm"
+                    style={{ backgroundColor: "#dc2626" }}
+                  >
+                    <XCircle size={16} />
+                    Reject Request
+                  </button>
+                </div>
+              )}
+
               {item.status === "active" && (
                 <div className="pt-2 space-y-3">
                   <button
@@ -188,6 +228,7 @@ function DetailsDrawer({ item, onClose, dark }) {
                   </button>
 
                   <button
+                    onClick={handleSuspend}
                     className="w-full rounded-xl py-3 font-semibold text-white flex items-center justify-center gap-2 text-sm"
                     style={{ backgroundColor: "#f97316" }}
                   >

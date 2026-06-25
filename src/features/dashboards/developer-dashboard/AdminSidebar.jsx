@@ -4,26 +4,43 @@ import { FileText, Users, LogOut, X } from "lucide-react";
 import themesMAP from "../../../../themes/themes";
 
 const NAV_ITEMS = [
-  { key: "signup-requests", label: "Signup Requests", icon: FileText, path: "/admin/signup-requests" },
-  { key: "team",            label: "Team",            icon: Users,    path: "/admin/team" },
-  { key: "logs",            label: "Logs",            icon: FileText, path: "/admin/logs" },
+  {
+    key: "signup-requests",
+    label: "Signup Requests",
+    icon: FileText,
+    path: "/devdashboard/signup-requests",
+  },
+  {
+    key: "team",
+    label: "Team",
+    icon: Users,
+    path: "/devdashboard/team",
+  },
+  {
+    key: "logs",
+    label: "Logs",
+    icon: FileText,
+    path: "/devdashboard/logs",
+  },
 ];
 
 export default function AdminSidebar({ dark, mobile = false, onClose }) {
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const text    = dark ? themesMAP["text-light"] : themesMAP["text-dark"];
-  const muted   = dark ? "#94a3b8"               : "#64748b";
-  const cardBg  = dark ? "#1e293b"               : "#ffffff";
-  const border  = dark ? "#334155"               : "#e2e8f0";
+  const text = dark ? themesMAP["text-light"] : themesMAP["text-dark"];
+  const muted = dark ? "#94a3b8" : "#64748b";
+  const cardBg = dark ? "#1e293b" : "#ffffff";
+  const border = dark ? "#334155" : "#e2e8f0";
   const primary = "#410fc7";
 
   const itemBase =
     "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all";
 
   const handleLogout = () => {
+    localStorage.removeItem("token");
     navigate("/login");
+    if (mobile && onClose) onClose();
   };
 
   const content = (
@@ -33,7 +50,6 @@ export default function AdminSidebar({ dark, mobile = false, onClose }) {
       } border-r px-4 py-6 flex flex-col justify-between`}
       style={{ backgroundColor: cardBg, borderColor: border }}
     >
-      {/* ── Logo + close (mobile) ── */}
       <div>
         <div className="mb-8 px-2 flex items-start justify-between">
           <div>
@@ -52,10 +68,10 @@ export default function AdminSidebar({ dark, mobile = false, onClose }) {
           )}
         </div>
 
-        {/* ── Navigation ── */}
         <nav className="space-y-2">
           {NAV_ITEMS.map(({ key, label, icon: Icon, path }) => {
-            const isActive = pathname.startsWith(path);
+            const isActive = pathname === path;
+
             return (
               <button
                 key={key}
@@ -77,7 +93,6 @@ export default function AdminSidebar({ dark, mobile = false, onClose }) {
         </nav>
       </div>
 
-      {/* ── User card + logout ── */}
       <div>
         <div
           className="rounded-2xl p-4 mb-4"
@@ -103,10 +118,8 @@ export default function AdminSidebar({ dark, mobile = false, onClose }) {
     </div>
   );
 
-  // Desktop — render inline
   if (!mobile) return content;
 
-  // Mobile — animated overlay
   return (
     <AnimatePresence>
       <motion.div
@@ -115,13 +128,8 @@ export default function AdminSidebar({ dark, mobile = false, onClose }) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        {/* Backdrop */}
-        <div
-          className="absolute inset-0 bg-black/40"
-          onClick={onClose}
-        />
+        <div className="absolute inset-0 bg-black/40" onClick={onClose} />
 
-        {/* Slide-in panel */}
         <motion.div
           initial={{ x: -320 }}
           animate={{ x: 0 }}
