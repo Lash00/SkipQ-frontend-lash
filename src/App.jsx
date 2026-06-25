@@ -19,6 +19,7 @@ import SignupRequests from "./features/dashboards/developer-dashboard/SignupRequ
 import Team from "./features/dashboards/developer-dashboard/Team";
 import Logs from "./features/dashboards/developer-dashboard/Logs";
 import ProtectedRoute from "./features/dashboards/developer-dashboard/ProtectedRoute";
+import PublicRoute from "./PublicRoute";
 // Info pages
 // import HowItWorks from "./Info/HowItWorks";
 import HowItWorks from "./info/HowItWorks";
@@ -46,9 +47,11 @@ function App() {
           </Route>
 
           {/* Auth */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/setPassword/:token" element={<SetPassword />} />
+          <Route element={<PublicRoute />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/setPassword/:token" element={<SetPassword />} />
+          </Route>
           <Route
             path="/registration-guidelines"
             element={<RegesterationGuidelines />}
