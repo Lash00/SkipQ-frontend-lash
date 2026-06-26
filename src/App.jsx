@@ -33,6 +33,13 @@ import SuperAdminManagers from "./features/dashboards/super-Admin/SuperAdminMana
 import SuperAdminCameras from "./features/dashboards/super-Admin/SuperAdminCameras";
 import SuperAdminAtms from "./features/dashboards/super-Admin/SuperAdminAtms";
 
+// Branch Manager Dashboard
+import BranchManagerLayout from "./features/dashboards/BranchManager/components/BranchManagerLayout";
+import BranchManagerOverview from "./features/dashboards/BranchManager/BranchManagerOverview";
+import BranchManagerQueue from "./features/dashboards/BranchManager/BranchManagerQueue";
+import BranchManagerAtms from "./features/dashboards/BranchManager/BranchManagerAtms";
+import BranchManagerSettings from "./features/dashboards/BranchManager/BranchManagerSettings";
+
 // Info
 import HowItWorks from "./info/HowItWorks";
 import Pricing from "./info/Pricing";
@@ -84,6 +91,9 @@ function App() {
             <Route path="team" element={<Team />} />
             <Route path="logs" element={<Logs />} />
           </Route>
+
+          {/* ================= Super Admin Dashboard ================= */}
+
           <Route
             path="/superDashboard"
             element={
@@ -105,10 +115,22 @@ function App() {
 
           {/* ================= Branch Manager Dashboard ================= */}
 
-          {/* اعمله بعدين */}
-          {/* <Route path="/branchDashboard" element={<BranchManagerLayout />}>
-              ...
-          </Route> */}
+          <Route
+            path="/branchDashboard"
+            element={
+              <ProtectedRoute role="Branch Manager">
+                <BranchManagerLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<BranchManagerOverview />} />
+
+            <Route path="queue" element={<BranchManagerQueue />} />
+
+            <Route path="atms" element={<BranchManagerAtms />} />
+
+            <Route path="settings" element={<BranchManagerSettings />} />
+          </Route>
 
           {/* Info pages (standalone with their own minimal navbar) */}
           <Route path="/how-it-works" element={<HowItWorks />} />
